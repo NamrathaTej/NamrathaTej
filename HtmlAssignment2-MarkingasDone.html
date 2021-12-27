@@ -1,0 +1,265 @@
+ <!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width"> 
+	<link rel="icon" href="https://mpng.subpng.com/20180509/txe/kisspng-letter-case-cursive-font-letter-t-5af2dff33e1499.6271376315258664832543.jpg" type="image/x-icon" />
+    <title>Task Management System</title>
+    <style>
+		#body{
+		background-color: grey;
+		}
+		
+        /* #back{
+        background-color: grey;
+		width: 100;
+		height: 400;
+        } */
+		
+    	#heading{
+    	  font-family: Calibri;
+    	  background-color: black;
+    	  color: white;
+          text-align: center;
+		  position: relative;
+		  margin: 5px 400px;
+		  width: 50%
+    	}
+		
+		/* CSS for remove all button div tag */
+		.rembtn{
+    	  font-family: Calibri;
+    	  background-color: grey;
+    	  color: white;
+          text-align: center;
+		  position: relative;
+		  margin: 75px 400px;
+		  width: 50%
+    	}
+		
+		/* CSS for the p tag created using DOM 
+        p{
+          text-align: left;
+		  padding: 0px 60px;
+		  color: black;
+		  background-color: #ebecdf;
+   		  word-wrap: break-word;
+        } */
+		
+		/* CSS for the add task name text field */
+		.input{
+		font-family: Calibri;
+		color: grey;
+		padding: 10px;
+		margin: 15px 0px;
+		width: 50%
+		}
+		
+		/* CSS for the div element when new task is added */
+        .divtasks{
+          text-align: left;
+    	  color: black;
+		  background-color: #ebecdf;
+   		  word-wrap: break-word;
+		  padding: 5px 60px;
+		}
+		
+		/* CSS for the div element when the task is deleted */
+        .divtaskscancel{
+          text-align: left;
+		  color: black;
+		  background-color: #b4d9be;
+		  word-wrap: break-word;
+		  padding: 5px 60px;
+		  /*text-decoration: line-through;*/
+		} 
+		
+		/* CSS for the div element when the task is deleted and to set the right symbol before task*/
+		.divtaskscancel::before{
+		  content: "\2713";
+		  font-size:17px;
+		} 
+		
+		/* CSS for the add task button */
+		.addtaskbtn {
+        border: none;
+        color: white;
+		font-family: Calibri;
+        position: relative;
+        background: #a1a19b;
+        text-align: center;
+        text-decoration: none;
+        font-size: 15px;
+        cursor: pointer;
+		padding: 10px;
+		width: 140px;
+		}
+		
+		/* CSS for the remove all button */
+		.remallbtn {
+		border: none;
+        color: white;
+		font-family: Calibri;
+        position: relative;
+        background: #5c5c57;
+        text-align: center;
+        text-decoration: none;
+        font-size: 15px;
+        cursor: pointer;
+		padding: 10px;
+		width: 140px;
+		}
+		
+		/* CSS for button created */
+       .button {
+        border: none;
+        color: black;
+        position: relative;
+        background: transparent;
+        text-align: center;
+        text-decoration: none;
+        font-size: 15px;
+        cursor: pointer;
+		float: right;
+		}
+		
+	
+    </style>
+  </head>
+  
+  <body id="body">
+      <script>
+	  
+		//declare a variable to set the ID value
+   		var a = 1;
+		
+		//function to create a new p element and add the task details.
+        function addTask(){
+        //alert("Hi1");
+        const p = document.createElement("div");
+        //alert("p=" + p);
+		
+		//set the id for div element created.
+        p.id = a;
+		//alert(p.id);
+		
+		//set the class name for div element created.
+		p.className="divtasks";
+		//alert(p.class);
+		
+        //var i = p.id;
+        //alert(i);
+        //p.style.align = "left";
+		
+		//fetch the value of task details typed in the add task field.
+        let x = document.getElementById("name").value;
+        //alert(x);
+		
+		//add text
+        const node = document.createTextNode(x);
+		
+		//add the text to the paragraph element.
+        p.appendChild(node);
+       	
+		//create button using Input element and set attributes as below.
+        const btn = document.createElement("Input");
+        btn.setAttribute("id",a);
+        btn.setAttribute("type","submit");
+        btn.setAttribute("value","X");
+        btn.setAttribute("class","button");
+        //alert(b, p);
+		
+		//set the onclick attribute to call test function and this.id passes the current id that is set to the button.
+        btn.setAttribute("onclick", "test(this.id)");
+        p.appendChild(btn);
+       
+        /*
+		const btn = document.createElement("button");
+        btn.className = "button";
+        btn.innerHTML = "x";
+        btn.id = a;
+        btn.onclick = test1();
+		alert(btn.id);
+        alert(a);
+		para.appendChild(btn); */
+		
+		//increment the value of a by 1 to assign id to next element.
+        a=a+1;
+        
+		//add the entire div element with button after the div id ="tasks" element.
+        const element = document.getElementById("tasks");
+		element.appendChild(p);
+		//alert(element.innerHTML);
+        }
+		
+		//function to fetch the ID of the button and delete the elements.
+		function test(id) {
+         //alert (id);
+        //const r = document.getElementById(id).innerHTML;
+		//const r1 = document.getElementById(id);
+		//r1.innerHTML="<del>" + r + "</del>";
+		//alert(r);
+		//alert(r1.innerHTML);
+		//const ab = document.querySelectorAll("p");
+		//alert(ab[id].innerHTML);
+		//r.remove();
+		
+		const r = document.getElementById(id);
+		
+		//set the class name for div element when the cancel button is clicked.
+		r.className = "divtaskscancel";
+		
+		//set the text for div element to strike the task details when the cancel button is clicked.
+		r.innerHTML = "<del>" + r.innerHTML + "</del>";
+        }
+		
+		function removeallTasks(){
+		//var node = document.getElementById('tasks');
+		//node.innerHTML = "";
+		
+		//const n= document.getElementById("tasks")
+		//n.remove();
+		
+		var n, i;
+		
+		//search for all the elements with class name = divtasks.
+		var n= document.querySelectorAll(".divtasks");
+		//alert(n.length);
+		
+		//For loop to loop through all the elements  with class name = divtasks amd set className = "divtaskscancel";
+		for (i = 0; i < n.length; i++) {
+		n[i].className = "divtaskscancel";
+		
+		//set the text for div element to strike the task details when the cancel button is clicked.
+		n[i].innerHTML = "<del>" + n[i].innerHTML + "</del>";
+		//alert(n);	
+		}
+		}
+	</script>
+   
+  <!-- Div element to hold the entire task management elements -->
+  <div id="back">    
+  
+    <!-- Div element to hold the header section including header, add field text and button -->
+    <div id="heading">
+    <br>
+     <h1 id="task">Task Management System</h1>
+         <!--
+     <form method="post"  >
+  		<input type="text" name="taskname" value="Add Task Name.." required>
+  		<input type="submit" onclick="myFuncN()" value="Add Task1">
+        </form>-->
+		
+		<!-- Create Text and Add Task button -->
+        <input id = "name" type="text" class="input" name="taskname" value="Add Task Name..">
+  		<input type="submit" class="addtaskbtn" onclick="addTask()" value="Add Task">
+		<br>
+		
+		<!-- Div element to hold the tasks added -->
+		<div id="tasks"></div>
+	</div>
+  </div>
+	<div class="rembtn">
+		<input type="submit" class="remallbtn" onclick="removeallTasks()" value="Remove All">
+    </div>
+  </body>
+</html>
